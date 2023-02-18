@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -19,7 +20,14 @@ public class Runner {
             System.out.println("3. Quit");
 
             // Read user input
-            int choice = scanner.nextInt();
+            int choice;
+            try {
+                choice = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a number.\n");
+                scanner.nextLine(); // clear the scanner buffer
+                continue; // go back to the beginning of the loop
+            }
 
             // Play the selected game or quit
             if (choice == 1) {
