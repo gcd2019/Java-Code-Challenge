@@ -8,3 +8,7 @@
    3. To exit the program
 
 To choose the option you want, just enter the number associated to it.
+
+Classes that one should find in this project are the super class (Game), the subclasses (OneDieGame and TwoDiceGame), the runner and GameTests which is a simple test suite that makes sure the functionality works (Attempted to achieve 100% coverage).
+
+Also included javadocs in all classes with information of what every section of the code does.
