@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 /**
  * This class contains JUnit tests for the Game, OneDieGame, and TwoDiceGame classes.
  */
-class GameTests {
+class TestSuite {
 
     /**
      * Tests the constructor of OneDieGame by verifying that an IllegalArgumentException is thrown
