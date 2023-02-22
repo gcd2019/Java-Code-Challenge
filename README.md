@@ -1,6 +1,6 @@
 # Java-Code-Challenge
 
-# Instructions
+# Instructions and relevant information
 - After running the program the user will be received with a simple command line menu.
 - 3 Options will be given:
    1. To simulate the first game (when the player gets at least one 6 with 4 attempts wins)
