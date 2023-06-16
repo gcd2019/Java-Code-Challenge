@@ -30,15 +30,27 @@ public class SlotGameSimulation {
         long totalPayout = 0;
 
         for (int i = 0; i < NUM_ROUNDS; i++) {
-            int[] currentReelPositions = new int[3];
-            for (int j = 0; j < 3; j++) {
-                currentReelPositions[j] = random.nextInt(reels[j].length);
+            // Create a copy of the initial reels
+            int[][] currentReels = Arrays.stream(reels)
+                    .map(int[]::clone)
+                    .toArray(int[][]::new);
+
+            // Randomly shift each reel vertically
+            for (int[] reel : currentReels) {
+                int shift = random.nextInt(reel.length);
+                int[] temp = Arrays.copyOf(reel, reel.length);
+                for (int j = 0; j < reel.length; j++) {
+                    reel[(j + shift) % reel.length] = temp[j];
+                }
             }
 
+            // Evaluate wins based on the paylines
             for (int[] payline : PAYLINES) {
                 List<Integer> currentPayline = new ArrayList<>();
                 for (int j = 0; j < 3; j++) {
-                    currentPayline.add(reels[j][payline[j]]);
+                    int index = payline[j] / 3;  // Get the reel number
+                    int position = payline[j] % 3;  // Get the position on the reel
+                    currentPayline.add(currentReels[index][position]);
                 }
                 totalPayout += PAYOUTS.getOrDefault(currentPayline, 0);
             }
