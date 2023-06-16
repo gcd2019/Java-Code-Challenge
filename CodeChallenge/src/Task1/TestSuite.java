@@ -1,3 +1,5 @@
+package Task1;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Random;
@@ -5,12 +7,12 @@ import java.util.Random;
 import org.junit.jupiter.api.Test;
 
 /**
- * This class contains JUnit tests for the Game, OneDieGame, and TwoDiceGame classes.
+ * This class contains JUnit tests for the Task1.Game, Task1.OneDieGame, and Task1.TwoDiceGame classes.
  */
 class TestSuite {
 
     /**
-     * Tests the constructor of OneDieGame by verifying that an IllegalArgumentException is thrown
+     * Tests the constructor of Task1.OneDieGame by verifying that an IllegalArgumentException is thrown
      * if an invalid number of rolls or payout is specified, and that the properties of the game object are correctly
      * initialized otherwise.
      */
@@ -26,7 +28,7 @@ class TestSuite {
     }
 
     /**
-     * Tests the play method of OneDieGame by verifying that the number of wins returned is within the correct range
+     * Tests the play method of Task1.OneDieGame by verifying that the number of wins returned is within the correct range
      * based on the number of plays.
      */
     @Test
@@ -39,7 +41,7 @@ class TestSuite {
     }
 
     /**
-     * Tests that an IllegalArgumentException is thrown if the play method of OneDieGame is called with a numPlays argument
+     * Tests that an IllegalArgumentException is thrown if the play method of Task1.OneDieGame is called with a numPlays argument
      * that is not greater than zero.
      */
     @Test
@@ -53,7 +55,7 @@ class TestSuite {
     }
 
     /**
-     * Tests the getMean method of Game by verifying that the correct mean is returned for a given number of rolls and payout.
+     * Tests the getMean method of Task1.Game by verifying that the correct mean is returned for a given number of rolls and payout.
      */
     @Test
     void testGameGetMean() {
@@ -62,7 +64,7 @@ class TestSuite {
     }
 
     /**
-     * Tests that an IllegalArgumentException is thrown if the getMean method of Game is called with a numPlays argument
+     * Tests that an IllegalArgumentException is thrown if the getMean method of Task1.Game is called with a numPlays argument
      * that is not positive.
      */
     @Test
@@ -73,7 +75,7 @@ class TestSuite {
     }
 
     /**
-     * Tests the getVariance method of Game by verifying that the correct variance is returned for a given number of rolls and payout.
+     * Tests the getVariance method of Task1.Game by verifying that the correct variance is returned for a given number of rolls and payout.
      */
     @Test
     void testGameGetVariance() {
@@ -83,7 +85,7 @@ class TestSuite {
     }
 
     /**
-     * Tests the getVariance method of the Game class with an illegal argument.
+     * Tests the getVariance method of the Task1.Game class with an illegal argument.
      */
     @Test
     void testGameGetVarianceException() {
@@ -93,7 +95,7 @@ class TestSuite {
     }
 
     /**
-     * Tests the getStandardDeviation method of the Game class with various input values.
+     * Tests the getStandardDeviation method of the Task1.Game class with various input values.
      */
     @Test
     void testGameGetStandardDeviation() {
@@ -103,7 +105,7 @@ class TestSuite {
     }
 
     /**
-     * Tests the getGameNumber method of the OneDieGame class.
+     * Tests the getGameNumber method of the Task1.OneDieGame class.
      */
     @Test
     void testOneDieGameGetGameNumber() {
@@ -113,7 +115,7 @@ class TestSuite {
 
 
     /**
-     * Tests the simulate method of the Game class with a given number of simulations.
+     * Tests the simulate method of the Task1.Game class with a given number of simulations.
      */
     @Test
     void testGameSimulate() {
@@ -123,7 +125,7 @@ class TestSuite {
 
 
     /**
-     * Tests the constructor of the TwoDiceGame class with illegal arguments.
+     * Tests the constructor of the Task1.TwoDiceGame class with illegal arguments.
      * Tests that the game object is properly initialized for legal arguments.
      */
     @Test
@@ -138,7 +140,7 @@ class TestSuite {
     }
 
     /**
-     * Tests the play method of the TwoDiceGame class with a given number of plays.
+     * Tests the play method of the Task1.TwoDiceGame class with a given number of plays.
      * Ensures that the number of wins falls within the valid range.
      */
     @Test
@@ -151,7 +153,7 @@ class TestSuite {
     }
 
     /**
-     * Tests the play method of the TwoDiceGame class with a number of plays less than or equal to 0.
+     * Tests the play method of the Task1.TwoDiceGame class with a number of plays less than or equal to 0.
      * Ensures that an IllegalArgumentException is thrown with the proper error message.
      */
     @Test
@@ -165,7 +167,7 @@ class TestSuite {
     }
 
     /**
-     * Tests the getGameNumber method of the TwoDiceGame class.
+     * Tests the getGameNumber method of the Task1.TwoDiceGame class.
      */
     @Test
     void testTwoDiceGameGetGameNumber() {

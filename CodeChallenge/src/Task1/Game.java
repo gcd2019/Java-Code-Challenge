@@ -1,8 +1,10 @@
+package Task1;
+
 import java.util.Random;
 
 /**
- * The Game class is an abstract class that represents a generic game.
- * Subclasses of Game must implement the abstract methods and provide
+ * The Task1.Game class is an abstract class that represents a generic game.
+ * Subclasses of Task1.Game must implement the abstract methods and provide
  * their own game-specific logic.
  */
 public abstract class Game {
@@ -12,7 +14,7 @@ public abstract class Game {
     private Random rand;
 
     /**
-     * Constructs a new Game with the given number of rolls, payout, and random number generator.
+     * Constructs a new Task1.Game with the given number of rolls, payout, and random number generator.
      *
      * @param numRolls the number of rolls to play in each game
      * @param payout the payout for winning the game

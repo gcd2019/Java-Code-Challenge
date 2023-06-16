@@ -1,3 +1,5 @@
+package Task1;
+
 import java.util.Random;
 
 /**
@@ -6,7 +8,7 @@ import java.util.Random;
 public class OneDieGame extends Game {
 
     /**
-     * Constructs a new OneDieGame with the specified number of rolls per play, payout, and random number generator.
+     * Constructs a new Task1.OneDieGame with the specified number of rolls per play, payout, and random number generator.
      * @param numRolls the number of times the die is rolled per play.
      * @param payout the payout for a win.
      * @param rand the random number generator used to simulate the die rolls.

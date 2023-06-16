@@ -1,14 +1,16 @@
+package Task1;
+
 import java.util.Random;
 
 /**
- * A class representing a two-dice game that extends the Game class. In this game,
+ * A class representing a two-dice game that extends the Task1.Game class. In this game,
  * the player rolls two dice a specified number of times and wins if both dice
  * show a six at least once.
  */
 public class TwoDiceGame extends Game {
 
     /**
-     * Constructs a TwoDiceGame object with the given number of rolls, payout, and
+     * Constructs a Task1.TwoDiceGame object with the given number of rolls, payout, and
      * random number generator.
      *
      * @param numRolls the number of times the player will roll the dice in a game
