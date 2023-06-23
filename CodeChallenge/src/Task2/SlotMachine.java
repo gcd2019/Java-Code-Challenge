@@ -2,17 +2,33 @@ package Task2;
 
 import java.util.*;
 
+/**
+ * Represents a slot machine game.
+ */
 public class SlotMachine {
     private final List<Reel> reels;
     private List<Payline> paylines;
     private final int creditPerSpin;
 
+    /**
+     * Constructs a slot machine with the specified reels, credit per spin, and number of paylines.
+     *
+     * @param reels          the list of reels in the slot machine
+     * @param creditPerSpin  the amount of credits required per spin
+     * @param numPaylines    the number of paylines in the slot machine
+     */
     public SlotMachine(List<Reel> reels, int creditPerSpin, int numPaylines) {
         this.reels = reels;
         this.paylines = new ArrayList<>(Collections.nCopies(numPaylines, null));
         this.creditPerSpin = creditPerSpin;
     }
 
+    /**
+     * Spins the reels, determines the paylines, calculates the win based on the symbols,
+     * and triggers a bonus game if the bonus symbols are present.
+     *
+     * @return the total win amount
+     */
     public int spin() {
         // Re-initialize paylines before each spin
         this.paylines = new ArrayList<>(Collections.nCopies(this.paylines.size(), null));
@@ -86,6 +102,11 @@ public class SlotMachine {
         return win;
     }
 
+    /**
+     * Retrieves the credit required per spin.
+     *
+     * @return the credit required per spin
+     */
     public int getCreditPerSpin() {
         return creditPerSpin;
     }
