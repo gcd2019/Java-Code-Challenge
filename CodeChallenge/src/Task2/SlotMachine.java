@@ -18,20 +18,15 @@ public class SlotMachine {
         this.paylines = new ArrayList<>(Collections.nCopies(this.paylines.size(), null));
 
         boolean bonusTriggered = false;
-        for (Reel reel : reels) {
-            reel.spin();
-            // Check for Bonus Game
-            if (reel.getSymbolAtPosition(0).getType() == Symbol.Type.BONUS ||
-                    reel.getSymbolAtPosition(1).getType() == Symbol.Type.BONUS ||
-                    reel.getSymbolAtPosition(2).getType() == Symbol.Type.BONUS) {
-                bonusTriggered = true;
-            }
-        }
-
         for (int i = 0; i < 3; i++) {
             List<Symbol> symbols = new ArrayList<>();
             for (Reel reel : reels) {
-                symbols.add(reel.getSymbolAtPosition(i)); // Get the symbol at row i from each reel
+                Symbol symbol = reel.spin();
+                symbols.add(symbol);
+                // Check for Bonus Game
+                if (symbol.getType() == Symbol.Type.BONUS) {
+                    bonusTriggered = true;
+                }
             }
             paylines.set(i, new Payline(symbols));
         }
@@ -58,7 +53,7 @@ public class SlotMachine {
 
         // Trigger bonus game if bonus symbols were present
         if (bonusTriggered) {
-            BonusGame bonusGame = new BonusGame();
+            BonusGame bonusGame = new BonusGame(getCreditPerSpin());
             totalWin += bonusGame.play();
         }
         return totalWin;
