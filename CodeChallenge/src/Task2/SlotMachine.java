@@ -4,38 +4,91 @@ import java.util.*;
 
 public class SlotMachine {
     private final List<Reel> reels;
+    private List<Payline> paylines;
     private final int creditPerSpin;
 
-    public SlotMachine(List<Reel> reels, int creditPerSpin) {
+    public SlotMachine(List<Reel> reels, int creditPerSpin, int numPaylines) {
         this.reels = reels;
+        this.paylines = new ArrayList<>(Collections.nCopies(numPaylines, null));
         this.creditPerSpin = creditPerSpin;
     }
 
     public int spin() {
-        Map<Symbol.Type, Integer> symbolCounts = new HashMap<>();
+        // Re-initialize paylines before each spin
+        this.paylines = new ArrayList<>(Collections.nCopies(this.paylines.size(), null));
 
+        boolean bonusTriggered = false;
         for (Reel reel : reels) {
-            Symbol.Type type = reel.spin().getType();
-            symbolCounts.put(type, symbolCounts.getOrDefault(type, 0) + 1);
+            reel.spin();
+            // Check for Bonus Game
+            if (reel.getSymbolAtPosition(0).getType() == Symbol.Type.BONUS ||
+                    reel.getSymbolAtPosition(1).getType() == Symbol.Type.BONUS ||
+                    reel.getSymbolAtPosition(2).getType() == Symbol.Type.BONUS) {
+                bonusTriggered = true;
+            }
         }
 
-        int totalWin = calculateWin(symbolCounts);
-
-        // Check for bonus game
-        if (symbolCounts.getOrDefault(Symbol.Type.BONUS, 0) >= 3) {
-            totalWin += new BonusGame().play();
+        for (int i = 0; i < 3; i++) {
+            List<Symbol> symbols = new ArrayList<>();
+            for (Reel reel : reels) {
+                symbols.add(reel.getSymbolAtPosition(i)); // Get the symbol at row i from each reel
+            }
+            paylines.set(i, new Payline(symbols));
         }
 
+        // Add diagonal paylines
+        for (int i = 3; i < paylines.size(); i++) {
+            List<Symbol> symbols = new ArrayList<>();
+            for (int j = 0; j < reels.size(); j++) {
+                if (i == 3) {
+                    // Top left to bottom right diagonal
+                    symbols.add(reels.get(j).getSymbolAtPosition(j));
+                } else {
+                    // Top right to bottom left diagonal
+                    symbols.add(reels.get(j).getSymbolAtPosition(2 - j));
+                }
+            }
+            paylines.set(i, new Payline(symbols));
+        }
+
+        int totalWin = 0;
+        for (Payline payline : paylines) {
+            totalWin += calculateWin(payline.getSymbols());
+        }
+
+        // Trigger bonus game if bonus symbols were present
+        if (bonusTriggered) {
+            BonusGame bonusGame = new BonusGame();
+            totalWin += bonusGame.play();
+        }
         return totalWin;
     }
 
-    private int calculateWin(Map<Symbol.Type, Integer> symbolCounts) {
+    private int calculateWin(List<Symbol> symbols) {
         int win = 0;
-        if (symbolCounts.getOrDefault(Symbol.Type.HIGH_PAY, 0) >= 3) {
-            win += 1000;
-        } else if (symbolCounts.getOrDefault(Symbol.Type.LOW_PAY, 0) >= 3) {
-            win += 100;
+        Map<Symbol.Type, Integer> symbolCounts = new HashMap<>();
+        for (Symbol symbol : symbols) {
+            symbolCounts.put(symbol.getType(), symbolCounts.getOrDefault(symbol.getType(), 0) + 1);
         }
+
+        // Consider Wild Symbols as any symbol except bonus
+        int wildCount = symbolCounts.getOrDefault(Symbol.Type.WILD, 0);
+        for (Symbol.Type type : Symbol.Type.values()) {
+            if (type != Symbol.Type.BONUS && type != Symbol.Type.WILD) {
+                symbolCounts.put(type, symbolCounts.getOrDefault(type, 0) + wildCount);
+            }
+        }
+
+        // Assuming high pay symbols pay 100, 200, 300 credits respectively,
+        // and low pay symbols pay 50, 40, 30, 20 credits respectively for 3 matches
+        win += symbolCounts.getOrDefault(Symbol.Type.H1, 0) / 3 * 100;
+        win += symbolCounts.getOrDefault(Symbol.Type.H2, 0) / 3 * 200;
+        win += symbolCounts.getOrDefault(Symbol.Type.H3, 0) / 3 * 300;
+        win += symbolCounts.getOrDefault(Symbol.Type.L1, 0) / 3 * 50;
+        win += symbolCounts.getOrDefault(Symbol.Type.L2, 0) / 3 * 40;
+        win += symbolCounts.getOrDefault(Symbol.Type.L3, 0) / 3 * 30;
+        win += symbolCounts.getOrDefault(Symbol.Type.L4, 0) / 3 * 20;
+
         return win;
     }
 

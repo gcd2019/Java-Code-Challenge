@@ -9,8 +9,13 @@ public class Reel {
         this.symbols = symbols;
     }
 
-    public Symbol spin() {
-        int index = new Random().nextInt(symbols.size());
-        return symbols.get(index);
+    public List<Symbol> spin() {
+        // Shuffling the symbols to simulate a spin
+        Collections.shuffle(symbols);
+        return symbols;
+    }
+
+    public Symbol getSymbolAtPosition(int position) {
+        return symbols.get(position);
     }
 }
