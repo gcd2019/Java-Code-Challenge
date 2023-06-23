@@ -79,15 +79,14 @@ public class SlotMachine {
             }
         }
 
-        // Assuming high pay symbols pay 100, 200, 300 credits respectively,
-        // and low pay symbols pay 50, 40, 30, 20 credits respectively for 3 matches
-        win += symbolCounts.getOrDefault(Symbol.Type.H1, 0) / 3 * 100;
-        win += symbolCounts.getOrDefault(Symbol.Type.H2, 0) / 3 * 200;
-        win += symbolCounts.getOrDefault(Symbol.Type.H3, 0) / 3 * 300;
-        win += symbolCounts.getOrDefault(Symbol.Type.L1, 0) / 3 * 50;
-        win += symbolCounts.getOrDefault(Symbol.Type.L2, 0) / 3 * 40;
-        win += symbolCounts.getOrDefault(Symbol.Type.L3, 0) / 3 * 30;
-        win += symbolCounts.getOrDefault(Symbol.Type.L4, 0) / 3 * 20;
+        win += symbolCounts.getOrDefault(Symbol.Type.WILD, 0) / 3 * 2000;
+        win += symbolCounts.getOrDefault(Symbol.Type.H1, 0) / 3 * 800;
+        win += symbolCounts.getOrDefault(Symbol.Type.H2, 0) / 3 * 400;
+        win += symbolCounts.getOrDefault(Symbol.Type.H3, 0) / 3 * 80;
+        win += symbolCounts.getOrDefault(Symbol.Type.L1, 0) / 3 * 60;
+        win += symbolCounts.getOrDefault(Symbol.Type.L2, 0) / 3 * 20;
+        win += symbolCounts.getOrDefault(Symbol.Type.L3, 0) / 3 * 16;
+        win += symbolCounts.getOrDefault(Symbol.Type.L4, 0) / 3 * 12;
 
         return win;
     }
